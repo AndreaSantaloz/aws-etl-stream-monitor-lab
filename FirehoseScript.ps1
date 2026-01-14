@@ -8,30 +8,29 @@ $LAMBDA_ARN=$(aws lambda get-function --function-name employee-firehose-lambda -
 
 zip firehose.zip firehose.py
 
-aws lambda create-function \
-    --function-name employee-firehose-lambda \
-    --runtime python3.12 \
-    --role $ROLE_ARN \
-    --handler firehose.lambda_handler \
-    --zip-file fileb://firehose.zip \
-    --timeout 60 \
+aws lambda create-function `
+    --function-name "employee-firehose-lambda" `
+    --runtime "python3.12" `
+    --role $ROLE_ARN `
+    --handler "firehose.lambda_handler" `
+    --zip-file "fileb://firehose.zip" `
+    --timeout 60 `
     --memory-size 128
 
 
-<#
-aws lambda update-function-code \
-    --function-name energy-firehose-lambda \
+aws lambda update-function-code `
+    --function-name employee-firehose-lambda `
     --zip-file fileb://firehose.zip
 
 
-aws firehose create-delivery-stream \
-    --delivery-stream-name energy-delivery-stream \
-    --delivery-stream-type KinesisStreamAsSource \
-    --kinesis-stream-source-configuration "KinesisStreamARN=arn:aws:kinesis:$AWS_REGION:$ACCOUNT_ID"":stream/energy-stream,RoleARN=$ROLE_ARN" \
+aws firehose create-delivery-stream `
+    --delivery-stream-name employee-delivery-stream `
+    --delivery-stream-type KinesisStreamAsSource `
+    --kinesis-stream-source-configuration "KinesisStreamARN=arn:aws:kinesis $AWS_REGION : $ACCOUNT_ID"":stream/employee-stream,RoleARN=$ROLE_ARN" `
     --extended-s3-destination-configuration '{
         "BucketARN": "arn:aws:s3:::'"$BUCKET_NAME"'",
         "RoleARN": "'"$ROLE_ARN"'",
-        "Prefix": "raw/energy_consumption_five_minutes/processing_date=!{partitionKeyFromLambda:processing_date}/",
+        "Prefix": "raw/employee_consumption_five_minutes/processing_date=!{partitionKeyFromLambda:processing_date}/",
         "ErrorOutputPrefix": "errors/!{firehose:error-output-type}/",
         "BufferingHints": {
             "SizeInMBs": 64,
@@ -65,5 +64,4 @@ aws firehose create-delivery-stream \
                 }
             ]
         }
-    }'#>
-    
+    }'
