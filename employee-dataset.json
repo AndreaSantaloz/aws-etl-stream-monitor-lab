@@ -1,0 +1,132 @@
+[
+  {
+    "event_id": "EV-001",
+    "timestamp": "2026-01-15T13:00:00Z",
+    "id_empleado": "EMP_402",
+    "departamento": "Customer Support",
+    "metricas": {
+      "estado": "Disponible",
+      "latencia_red": 32,
+      "tareas_pendientes": 0,
+      "estres_index": 0.12
+    },
+    "geoloc": {"lat": 28.12, "lon": -15.43}
+  },
+  {
+    "event_id": "EV-002",
+    "timestamp": "2026-01-15T13:02:15Z",
+    "id_empleado": "EMP_105",
+    "departamento": "IT Sales",
+    "metricas": {
+      "estado": "En llamada",
+      "latencia_red": 58,
+      "tareas_pendientes": 5,
+      "estres_index": 0.45
+    },
+    "geoloc": {"lat": 40.41, "lon": -3.70}
+  },
+  {
+    "event_id": "EV-003",
+    "timestamp": "2026-01-15T13:04:30Z",
+    "id_empleado": "EMP_402",
+    "departamento": "Customer Support",
+    "metricas": {
+      "estado": "En llamada",
+      "latencia_red": 45,
+      "tareas_pendientes": 3,
+      "estres_index": 0.24
+    },
+    "geoloc": {"lat": 28.12, "lon": -15.43}
+  },
+  {
+    "event_id": "EV-004",
+    "timestamp": "2026-01-15T13:06:45Z",
+    "id_empleado": "EMP_210",
+    "departamento": "Logistics",
+    "metricas": {
+      "estado": "En ruta",
+      "latencia_red": 120,
+      "tareas_pendientes": 12,
+      "estres_index": 0.61
+    },
+    "geoloc": {"lat": 41.38, "lon": 2.17}
+  },
+  {
+    "event_id": "EV-005",
+    "timestamp": "2026-01-15T13:08:00Z",
+    "id_empleado": "EMP_333",
+    "departamento": "IT Sales",
+    "metricas": {
+      "estado": "Reunión",
+      "latencia_red": 25,
+      "tareas_pendientes": 1,
+      "estres_index": 0.18
+    },
+    "geoloc": {"lat": 37.38, "lon": -5.98}
+  },
+  {
+    "event_id": "EV-006",
+    "timestamp": "2026-01-15T13:10:12Z",
+    "id_empleado": "EMP_402",
+    "departamento": "Customer Support",
+    "metricas": {
+      "estado": "Descanso",
+      "latencia_red": 30,
+      "tareas_pendientes": 2,
+      "estres_index": 0.15
+    },
+    "geoloc": {"lat": 28.12, "lon": -15.43}
+  },
+  {
+    "event_id": "EV-007",
+    "timestamp": "2026-01-15T13:12:25Z",
+    "id_empleado": "EMP_105",
+    "departamento": "IT Sales",
+    "metricas": {
+      "estado": "Disponible",
+      "latencia_red": 42,
+      "tareas_pendientes": 0,
+      "estres_index": 0.22
+    },
+    "geoloc": {"lat": 40.41, "lon": -3.70}
+  },
+  {
+    "event_id": "EV-008",
+    "timestamp": "2026-01-15T13:14:40Z",
+    "id_empleado": "EMP_210",
+    "departamento": "Logistics",
+    "metricas": {
+      "estado": "En ruta",
+      "latencia_red": 145,
+      "tareas_pendientes": 10,
+      "estres_index": 0.75
+    },
+    "geoloc": {"lat": 41.40, "lon": 2.19}
+  },
+  {
+    "event_id": "EV-009",
+    "timestamp": "2026-01-15T13:16:55Z",
+    "id_empleado": "EMP_501",
+    "departamento": "Customer Support",
+    "metricas": {
+      "estado": "En llamada",
+      "latencia_red": 38,
+      "tareas_pendientes": 4,
+      "estres_index": 0.33
+    },
+    "geoloc": {"lat": 28.13, "lon": -15.44}
+  },
+  {
+    "event_id": "EV-010",
+    "timestamp": "2026-01-15T13:18:10Z",
+    "id_empleado": "EMP_333",
+    "departamento": "IT Sales",
+    "metricas": {
+      "estado": "Disponible",
+      "latencia_red": 28,
+      "tareas_pendientes": 0,
+      "estres_index": 0.10
+    },
+    "geoloc": {"lat": 37.38, "lon": -5.98}
+  }
+]

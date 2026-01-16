@@ -1,5 +1,4 @@
 $BUCKET_NAME="ulpgc-employees"
-$DAILY_OUTPUT="s3://$BUCKET_NAME/processed/employee_consumption_daily/"
 $ROLE_ARN=$(aws iam get-role --role-name LabRole --query 'Role.Arn' --output text)
 $DATABASE="emloyee_db"
 $TABLE="emloyee_consumption_five_minutes"
