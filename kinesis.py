@@ -5,7 +5,7 @@ from loguru import logger
 import datetime
 
 # CONFIGURACIÓN
-STREAM_NAME = 'employee-stream'
+STREAM_NAME = 'employees'
 REGION = 'us-east-1' 
 INPUT_FILE = 'employee-dataset.json'
 
@@ -19,38 +19,44 @@ def run_producer():
     data = load_data(INPUT_FILE)
     records_sent = 0
     
-    # El JSON tiene una estructura 'included' donde están los arrays de valores
-    series_list = data.get('included', [])
-    
+    # IMPORTANTE: Tu nuevo JSON es una lista directa, no tiene 'included'
     logger.info(f"Iniciando transmisión al stream: {STREAM_NAME}...")
     
-    # Iteramos sobre los 3 tipos de demanda (Real, Programada, Prevista)
-    for serie in series_list:
-        tipo_demanda = serie['attributes']['title']
-        valores = serie['attributes']['values']
+    # Iteramos directamente sobre la lista de registros de empleados
+    for registro in data:
+        # Extraemos los campos del nuevo formato para el log y la lógica
+        id_emp = registro.get('id_empleado')
+        depto = registro.get('departamento')
+        timestamp = registro.get('timestamp')
+        metricas = registro.get('metricas', {})
         
-        for registro in valores:
-            # Estructura del mensaje a enviar
-            payload = {
-                'tipo': tipo_demanda,
-                'valor': registro['value'],
-                'timestamp_origen': registro['datetime'],
-                'porcentaje': registro['percentage']
-            }
-            
-            # Enviar a Kinesis
-            response = kinesis.put_record(
-                StreamName=STREAM_NAME,
-                Data=json.dumps(payload),
-                PartitionKey=tipo_demanda # Usamos el tipo como clave de partición
-            )
-            
-            records_sent += 1
-            logger.info(f"Registro enviado al shard {response['ShardId']} con SequenceNumber {response['SequenceNumber']}")
-            logger.info(f"Enviado [{tipo_demanda}]: {registro['value']} MW")
-            
-            # Pequeña pausa para simular streaming y no saturar de golpe
-            time.sleep(0.05) 
+        # Estructura del mensaje a enviar (adaptado a las nuevas columnas)
+        payload = {
+            'event_id': registro.get('event_id'),
+            'timestamp': timestamp,
+            'id_empleado': id_emp,
+            'departamento': depto,
+            'estado': metricas.get('estado'),
+            'latencia': metricas.get('latencia_red'),
+            'tareas_pendientes': metricas.get('tareas_pendientes'),
+            'estres_index': metricas.get('estres_index'),
+            'geoloc': registro.get('geoloc')
+        }
+        
+        # Enviar a Kinesis
+        response = kinesis.put_record(
+            StreamName=STREAM_NAME,
+            Data=json.dumps(payload),
+            # Usamos el departamento o el ID como clave de partición
+            PartitionKey=id_emp
+        )
+        
+        records_sent += 1
+        logger.info(f"Registro enviado al shard {response['ShardId']} con SequenceNumber {response['SequenceNumber']}")
+        logger.info(f"Enviado [Empleado: {id_emp}]: Estado {metricas.get('estado')} en {depto}")
+        
+        # Pequeña pausa para simular streaming y no saturar de golpe
+        time.sleep(0.05) 
 
     logger.info(f"Fin de la transmisión. Total registros enviados: {records_sent}")
 

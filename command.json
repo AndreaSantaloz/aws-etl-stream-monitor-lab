@@ -1,0 +1,5 @@
+﻿{
+  "Name": "glueetl",
+  "ScriptLocation": "s3://ulpgc-employees/scripts/employees_daily.py",
+  "PythonVersion": "3"
+}

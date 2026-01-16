@@ -1,0 +1,7 @@
+﻿{
+  "--database": "emloyee_db",
+  "--table": "emloyee_consumption_five_minutes",
+  "--output_path": "s3://ulpgc-employees/processed/emloyee_consumption_daily/",
+  "--enable-continuous-cloudwatch-log": "true",
+  "--spark-event-logs-path": "s3://ulpgc-employees/logs/"
+}
